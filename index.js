@@ -20,17 +20,21 @@ function setOffset(evt) {
         pressed = true;
         slider.style.cursor = "grabbing";
         startX = e.offsetX - innerSlider.offsetLeft;
-        console.log(startX, x, innerSlider.style.left);
     });
 }
 
 function controlBorder() {
     let outer = slider.getBoundingClientRect();
     let inner = innerSlider.getBoundingClientRect();
+    console.log(outer.width)
+    console.log(inner.width)
+    console.log(inner)
+
+
     if (parseInt(innerSlider.style.left) > 0) {
         innerSlider.style.left = "0px";
-    } else if (inner.width < outer.width) {
-        innerSlider.style.left = `-${inner.width - outer.width}px `;
+    } else if (parseInt(innerSlider.style.left) < -outer.width) {
+        innerSlider.style.left = `-${outer.width}px `;
     }
 }
 
