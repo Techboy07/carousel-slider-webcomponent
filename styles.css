@@ -1,0 +1,38 @@
+.slides {
+  width: 200px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slider {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  aspect-ratio: 4;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* padding: 100px; */
+}
+.innerslider {
+  display: flex;
+  width: 200%;
+  gap: 1%;
+  position: absolute;
+}
+.fa-solid {
+  vertical-align: top;
+  font-size: 27px;
+  color: black;
+  padding: 5px;
+  position: absolute;
+  z-index: 3333;
+}
+#right {
+  right: 0px;
+}
+.control:hover {
+  background-color: #343a40;
+  color: aliceblue;
+}
