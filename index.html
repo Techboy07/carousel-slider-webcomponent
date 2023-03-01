@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="slider">
+      <div class="innerslider">
+        <div class="card p-5 bg-dark slides"></div>
+        <div class="card p-5 bg-success slides"></div>
+        <div class="card p-5 bg-primary slides"></div>
+        <div class="card p-5 bg-warning slides"></div>
+        <div class="card p-5 bg-primary slides"></div>
+        <div class="card p-5 bg-danger slides"></div>
+        <div class="card p-5 bg-primary slides"></div>
+        <div class="card p-5 bg-success slides"></div>
+        <div class="card p-5 bg-primary slides"></div>
+        <div class="card p-5 bg-warning slides"></div>
+        <div class="card p-5 bg-primary slides"></div>
+        <div class="card p-5 bg-danger slides"></div>
+      </div>
+    </div>
+
+    <style>
+      .slides {
+        width: 200px !important;
+      }
+      .slider {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        width: 80%;
+        overflow: hidden;
+        padding: 100px;
+      }
+      .innerslider {
+        display: flex;
+        width: 200%;
+        gap: 1%;
+        position: absolute;
+      }
+    </style>
+    <!--  -->
+    <script>
+      const slider = document.querySelector(".slider");
+      const innerSlider = document.querySelector(".innerslider");
+
+      let pressed = false;
+      let startX, x;
+      function doEvent(evt, func) {
+        func(evt);
+      }
+
+      function moveSlider(evt) {
+        slider.addEventListener(evt, (e) => {
+          x = e.offsetX;
+          pressed ? (innerSlider.style.left = `${x - startX}px`) : null;
+          controlBorder();
+        });
+      }
+      function setOffset(evt) {
+        slider.addEventListener(evt, (e) => {
+          e.preventDefault();
+          pressed = true;
+          slider.style.cursor = "grabbing";
+          startX = e.offsetX - innerSlider.offsetLeft;
+          console.log(startX, x, innerSlider.style.left);
+        });
+      }
+
+      function controlBorder() {
+        let outer = slider.getBoundingClientRect();
+        let inner = innerSlider.getBoundingClientRect();
+        if (parseInt(innerSlider.style.left) > 0) {
+          innerSlider.style.left = "0px";
+        } else if (inner.width < outer.width) {
+          innerSlider.style.left = `-${inner.width - outer.width}px `;
+        }
+      }
+
+      window.addEventListener("mouseup", () => (pressed = false));
+      doEvent("mousedown", setOffset);
+      doEvent("mousemove", moveSlider);
+    </script>
+  </body>
+</html>
